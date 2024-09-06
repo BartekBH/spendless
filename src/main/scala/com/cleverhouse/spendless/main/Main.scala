@@ -32,7 +32,9 @@ object Main extends IOApp.Simple {
     implicit val system: ActorSystem = actorSystem
     implicit val rt: IORuntime = runtime
 
-    val routes = TestRoutes().route
+    val userModule: UserModule = UserModule(dbCtx, ec, rt)
+
+    val routes = userModule.route
 
     val host = config.getString("http.host")
     val port = config.getInt("http.port")
