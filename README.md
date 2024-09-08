@@ -2,6 +2,6 @@ Tech stack:
 - pekko-http
 - slick
 - cats
-- sealed monads
+- sealed monad
 - macwire
 - circe
