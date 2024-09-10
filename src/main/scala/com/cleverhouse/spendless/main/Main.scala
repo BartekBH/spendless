@@ -2,6 +2,7 @@ package com.cleverhouse.spendless.main
 
 import cats.effect.unsafe.IORuntime
 import cats.effect.{IO, IOApp, Resource}
+import com.cleverhouse.spendless.budget.BudgetModule
 import com.cleverhouse.spendless.user.UserModule
 import com.typesafe.config.ConfigFactory
 import com.cleverhouse.spendless.utils.ce.*
@@ -9,6 +10,7 @@ import com.cleverhouse.spendless.utils.db.PostgresIOTransactor
 import org.apache.pekko.actor.ActorSystem
 import org.apache.pekko.http.scaladsl.Http
 import slick.jdbc.PostgresProfile.api.*
+import org.apache.pekko.http.scaladsl.server.Directives.concat
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.duration.*
@@ -33,8 +35,12 @@ object Main extends IOApp.Simple {
     implicit val rt: IORuntime = runtime
 
     val userModule: UserModule = UserModule(dbCtx, ec, rt)
+    val budgetModule: BudgetModule = BudgetModule(dbCtx, ec, rt)
 
-    val routes = userModule.route
+    val routes = concat(
+      userModule.route,
+      budgetModule.route
+    )
 
     val host = config.getString("http.host")
     val port = config.getInt("http.port")

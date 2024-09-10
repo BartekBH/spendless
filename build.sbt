@@ -20,6 +20,7 @@ val SealedMonadVersion    = "1.3.0"
 val CirceVersion          = "0.14.9"
 val PekkoHttpJsonVersion  = "2.6.0"
 val Log4CatsVersion       = "2.7.0"
+val MockitoVersion        = "1.17.37"
 
 libraryDependencies ++= Seq(
   "org.apache.pekko"              %% "pekko-actor-typed"   % PekkoVersion,
@@ -38,6 +39,5 @@ libraryDependencies ++= Seq(
   "io.circe"                      %% "circe-parser"        % CirceVersion,
   "io.circe"                      %% "circe-generic"       % CirceVersion,
   "com.github.pjfanning"          %% "pekko-http-circe"    % PekkoHttpJsonVersion,
-  "org.typelevel"                 %% "log4cats-slf4j"       % Log4CatsVersion
-
+  "org.typelevel"                 %% "log4cats-slf4j"      % Log4CatsVersion
 )

@@ -1,9 +1,7 @@
 package com.cleverhouse.spendless.user.repositories
 
 import com.cleverhouse.spendless.user.domain.User
-import com.cleverhouse.spendless.user.repositories.tables.UserTable
 import com.cleverhouse.spendless.utils.db.FilterParamType
-import slick.lifted.TableQuery
 import slick.jdbc.PostgresProfile.api.*
 
 import java.util.UUID
