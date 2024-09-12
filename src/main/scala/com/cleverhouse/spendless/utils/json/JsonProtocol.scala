@@ -1,5 +1,8 @@
 package com.cleverhouse.spendless.utils.json
 
+import com.cleverhouse.spendless.auth.domain.AuthContext
+import com.cleverhouse.spendless.auth.services.LoginByPasswordService.{LoginRequest, LoginResponseData}
+import com.cleverhouse.spendless.auth.services.PasswordSetService.PasswordSetRequest
 import com.cleverhouse.spendless.budget.domain.Budget
 import com.cleverhouse.spendless.budget.services.BudgetCreateService.BudgetCreateRequest
 import com.cleverhouse.spendless.budget.services.BudgetUpdateService.BudgetUpdateRequest
@@ -11,7 +14,17 @@ import com.cleverhouse.spendless.user.services.UserUpdateService.UserUpdateReque
 
 trait JsonProtocol extends ErrorAccumulatingCirceSupport {
   import io.circe.generic.semiauto._
-  
+
+  // Auth
+  implicit val authDecoder: Decoder[AuthContext] = deriveDecoder
+  implicit val authEncoder: Encoder[AuthContext] = deriveEncoder
+  implicit val loginRequestDecoder: Decoder[LoginRequest] = deriveDecoder
+  implicit val loginRequestEncoder: Encoder[LoginRequest] = deriveEncoder
+  implicit val passwordSetRequestDecoder: Decoder[PasswordSetRequest] = deriveDecoder
+  implicit val passwordSetRequestEncoder: Encoder[PasswordSetRequest] = deriveEncoder
+  implicit val loginResponseDataRequestDecoder: Decoder[LoginResponseData] = deriveDecoder
+  implicit val loginResponseDataRequestEncoder: Encoder[LoginResponseData] = deriveEncoder
+
   // User
   implicit val userDecoder: Decoder[User] = deriveDecoder
   implicit val userEncoder: Encoder[User] = deriveEncoder
@@ -21,7 +34,7 @@ trait JsonProtocol extends ErrorAccumulatingCirceSupport {
   implicit val userCreateRequestEncoder: Encoder[UserCreateRequest] = deriveEncoder
   implicit val userUpdateRequestDecoder: Decoder[UserUpdateRequest] = deriveDecoder
   implicit val userUpdateRequestEncoder: Encoder[UserUpdateRequest] = deriveEncoder
-  
+
   // Budget
   implicit val budgetDecoder: Decoder[Budget] = deriveDecoder
   implicit val budgetEncoder: Encoder[Budget] = deriveEncoder

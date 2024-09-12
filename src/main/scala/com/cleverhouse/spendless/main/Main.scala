@@ -4,6 +4,7 @@ import cats.effect.unsafe.IORuntime
 import cats.effect.{IO, IOApp, Resource}
 import com.cleverhouse.spendless.budget.BudgetModule
 import com.cleverhouse.spendless.user.UserModule
+import com.cleverhouse.spendless.auth.AuthModule
 import com.typesafe.config.ConfigFactory
 import com.cleverhouse.spendless.utils.ce.*
 import com.cleverhouse.spendless.utils.db.PostgresIOTransactor
@@ -35,10 +36,12 @@ object Main extends IOApp.Simple {
     implicit val rt: IORuntime = runtime
 
     val userModule: UserModule = UserModule(dbCtx, ec, rt)
+    val authModule: AuthModule = AuthModule(dbCtx, config, userModule.userRepository, ec, rt)
     val budgetModule: BudgetModule = BudgetModule(dbCtx, ec, rt)
 
     val routes = concat(
       userModule.route,
+      authModule.route,
       budgetModule.route
     )
 

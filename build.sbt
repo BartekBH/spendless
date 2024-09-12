@@ -21,6 +21,9 @@ val CirceVersion          = "0.14.9"
 val PekkoHttpJsonVersion  = "2.6.0"
 val Log4CatsVersion       = "2.7.0"
 val MockitoVersion        = "1.17.37"
+val JbcryptVersion        = "0.4"
+val JwtCoreVersion        = "10.0.1"
+val JavaCompatVersion     = "1.0.2"
 
 libraryDependencies ++= Seq(
   "org.apache.pekko"              %% "pekko-actor-typed"   % PekkoVersion,
@@ -39,5 +42,8 @@ libraryDependencies ++= Seq(
   "io.circe"                      %% "circe-parser"        % CirceVersion,
   "io.circe"                      %% "circe-generic"       % CirceVersion,
   "com.github.pjfanning"          %% "pekko-http-circe"    % PekkoHttpJsonVersion,
-  "org.typelevel"                 %% "log4cats-slf4j"      % Log4CatsVersion
+  "org.typelevel"                 %% "log4cats-slf4j"      % Log4CatsVersion,
+  "com.github.jwt-scala"          %% "jwt-core"            % JwtCoreVersion,
+  "org.mindrot"                    % "jbcrypt"             % JbcryptVersion,
+  "org.scala-lang.modules"        %% "scala-java8-compat"  % JavaCompatVersion
 )
