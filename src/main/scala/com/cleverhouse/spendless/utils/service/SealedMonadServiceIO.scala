@@ -15,6 +15,7 @@ abstract class SealedMonadServiceIODBIO[ADT](val ioRuntime: IORuntime) {
   protected type StepDBIO[T] = Sealed[DBIO, T, ADT]
   protected type StepIO[T]   = Sealed[IO, T, ADT]
 
+
   implicit val ec: ExecutionContext = ioRuntime.compute
   implicit val dbioSync: Sync[DBIO] = implicitly[Sync[DBIO]]
 }
