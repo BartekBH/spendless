@@ -1,6 +1,7 @@
 package com.cleverhouse.spendless.budget.repositories
 
 import com.cleverhouse.spendless.budget.domain.Budget
+import com.cleverhouse.spendless.budget.domain.BudgetDomain.BudgetId
 import com.cleverhouse.spendless.budget.repositories.BudgetRepository.BudgetFilters
 import com.cleverhouse.spendless.budget.repositories.tables.BudgetTable
 import slick.jdbc.PostgresProfile.api.*
@@ -12,13 +13,14 @@ import java.util.UUID
 import scala.concurrent.ExecutionContext
 
 class BudgetRepositoryImpl(implicit e: ExecutionContext)
-  extends IdRepository[Budget, UUID, BudgetTable]
+  extends IdRepository[Budget, BudgetId, BudgetTable]
     with FilteringRepository[Budget, BudgetTable, BudgetFilters]
     with BudgetRepository {
+  import BudgetTable._
 
-  override protected def getId: Budget => UUID = _.id
+  override protected def getId: Budget => BudgetId = _.id
 
-  override protected def idBaseTypedType: BaseTypedType[UUID] = implicitly[BaseTypedType[UUID]]
+  override protected def idBaseTypedType: BaseTypedType[BudgetId] = implicitly[BaseTypedType[BudgetId]]
 
   override protected def ec: ExecutionContext = e
 

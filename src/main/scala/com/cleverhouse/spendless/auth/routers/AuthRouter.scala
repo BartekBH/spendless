@@ -15,7 +15,7 @@ class AuthRouter(loginByPasswordService: LoginByPasswordService, passwordSetServ
   extends JsonProtocol {
   import AuthRouter._
 
-  def route: Route =
+  def routes: Route =
     pathPrefix(authPath) {
       (post & path(loginPath) & entity(as[LoginRequest]) & pathEndOrSingleSlash) { request =>
         complete(loginByPasswordService.login(request)) {
@@ -26,7 +26,7 @@ class AuthRouter(loginByPasswordService: LoginByPasswordService, passwordSetServ
       }
     }
 
-  def route(authContext: AuthContext): Route =
+  def routes(authContext: AuthContext): Route =
     pathPrefix(authPath) {
       (patch & path(passwordPath) & entity(as[PasswordSetRequest]) & pathEndOrSingleSlash) { request =>
         complete(passwordSetService.passwordSet(authContext, request)) {

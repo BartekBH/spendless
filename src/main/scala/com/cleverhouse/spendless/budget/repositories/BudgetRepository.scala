@@ -1,6 +1,8 @@
 package com.cleverhouse.spendless.budget.repositories
 
 import com.cleverhouse.spendless.budget.domain.Budget
+import com.cleverhouse.spendless.budget.domain.BudgetDomain.*
+import com.cleverhouse.spendless.user.domain.UserDomain.UserId
 import com.cleverhouse.spendless.utils.db.FilterParamType
 import slick.jdbc.PostgresProfile.api.*
 
@@ -13,13 +15,14 @@ trait BudgetRepository {
   def find(filter: BudgetFilters): DBIO[Option[Budget]]
   def list(filter: BudgetFilters): DBIO[Seq[Budget]]
   def update(user: Budget): DBIO[Option[Budget]]
-  def purgeById(userId: UUID): DBIO[Int]
+  def purgeById(budgetId: BudgetId): DBIO[Int]
 }
 
 object BudgetRepository {
   case class BudgetFilters(
-    id: Option[UUID] = None,
-    ids: Option[Seq[UUID]] = None,
-    name: Option[String] = None)
+    id: Option[BudgetId] = None,
+    ids: Option[Seq[BudgetId]] = None,
+    name: Option[BudgetName] = None,
+    createdBy: Option[UserId] = None)
       extends FilterParamType
 }

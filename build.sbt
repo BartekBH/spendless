@@ -24,6 +24,7 @@ val MockitoVersion        = "1.17.37"
 val JbcryptVersion        = "0.4"
 val JwtCoreVersion        = "10.0.1"
 val JavaCompatVersion     = "1.0.2"
+val kebsVersion           = "1.9.7"
 
 libraryDependencies ++= Seq(
   "org.apache.pekko"              %% "pekko-actor-typed"   % PekkoVersion,
@@ -45,5 +46,6 @@ libraryDependencies ++= Seq(
   "org.typelevel"                 %% "log4cats-slf4j"      % Log4CatsVersion,
   "com.github.jwt-scala"          %% "jwt-core"            % JwtCoreVersion,
   "org.mindrot"                    % "jbcrypt"             % JbcryptVersion,
-  "org.scala-lang.modules"        %% "scala-java8-compat"  % JavaCompatVersion
+  "org.scala-lang.modules"        %% "scala-java8-compat"  % JavaCompatVersion,
+  "pl.iterators"                  %% "kebs-opaque"         % kebsVersion
 )

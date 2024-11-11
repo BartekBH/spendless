@@ -1,6 +1,7 @@
 package com.cleverhouse.spendless.user.repositories
 
 import com.cleverhouse.spendless.user.domain.User
+import com.cleverhouse.spendless.user.domain.UserDomain.{UserEmail, UserId}
 import com.cleverhouse.spendless.utils.db.FilterParamType
 import slick.jdbc.PostgresProfile.api.*
 
@@ -13,13 +14,13 @@ trait UserRepository {
   def find(filter: UserFilters): DBIO[Option[User]]
   def list(filter: UserFilters): DBIO[Seq[User]]
   def update(user: User): DBIO[Option[User]]
-  def purgeById(userId: UUID): DBIO[Int]
+  def purgeById(userId: UserId): DBIO[Int]
 }
 
 object UserRepository {
   case class UserFilters(
-    id: Option[UUID] = None,
-    ids: Option[Seq[UUID]] = None,
-    email: Option[String] = None)
+    id: Option[UserId] = None,
+    ids: Option[Seq[UserId]] = None,
+    email: Option[UserEmail] = None)
       extends FilterParamType
 }

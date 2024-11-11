@@ -50,8 +50,6 @@ class JwtService(config: JwtService.Config) {
 }
 
 object JwtService {
-  sealed trait DecodingResult
-
   case class Config(secret: String)
 
   object Config {
@@ -59,14 +57,10 @@ object JwtService {
       Config(secret = tsConfig.getString("jwt.secret"))
   }
 
-  object DecodingResult {
-    case class Decoded(payload: Json) extends DecodingResult
-
-    case class ParsingFailure(t: io.circe.ParsingFailure) extends DecodingResult
-
-    case class InvalidToken(t: Throwable) extends DecodingResult
-
-    case object Expired extends DecodingResult
-  }
+  enum DecodingResult:
+    case Decoded(payload: Json)
+    case ParsingFailure(t: io.circe.ParsingFailure)
+    case InvalidToken(t: Throwable)
+    case Expired
 
 }

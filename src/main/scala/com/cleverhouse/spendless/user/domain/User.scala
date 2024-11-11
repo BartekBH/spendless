@@ -1,11 +1,10 @@
 package com.cleverhouse.spendless.user.domain
 
-import java.time.Instant
-import java.util.UUID
+import com.cleverhouse.spendless.user.domain.UserDomain._
 
 case class User(
-  id: UUID,
-  email: String,
-  password: String,
-  createdAt: Instant,
-  modifiedAt: Instant)
+  id: UserId,
+  email: UserEmail,
+  name: UserName,
+  createdAt: UserCreatedAt,
+  modifiedAt: UserModifiedAt)

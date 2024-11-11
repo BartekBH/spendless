@@ -1,5 +1,6 @@
 package com.cleverhouse.spendless.auth.domain
 
-import java.util.UUID
+import com.cleverhouse.spendless.auth.domain.AuthDomain.PasswordHash
+import com.cleverhouse.spendless.user.domain.UserDomain.UserId
 
-case class UserPassword(userId: UUID, password: String)
+case class UserPassword(userId: UserId, password: PasswordHash)

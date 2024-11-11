@@ -5,7 +5,7 @@ import slick.ast.BaseTypedType
 
 import scala.concurrent.ExecutionContext
 
-trait IdRepository[T, Id, TableType <: Table[T] with IdTable[T, Id]] extends UpsertRepository[T, TableType] {
+trait IdRepository[T, Id, TableType <: Table[T] & IdTable[T, Id]] extends UpsertRepository[T, TableType] {
   protected def getId: T => Id
 
   protected def idBaseTypedType: BaseTypedType[Id]
