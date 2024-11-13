@@ -36,7 +36,7 @@ trait JsonProtocol extends ErrorAccumulatingCirceSupport {
   implicit val passwordSetRequestEncoder: Encoder[PasswordSetRequest] = deriveEncoder
   // AuthResponse
   implicit val jwtDecoder: Decoder[Jwt] = Decoder.decodeString.map(Jwt.apply)
-  implicit val jwtEncoder: Encoder[Jwt] = Encoder.encodeString.contramap(_.unwrap)
+  implicit val jwtEncoder: Encoder[Jwt] = Encoder.encodeString.contramap(_.value)
   implicit val loginResponseDataRequestDecoder: Decoder[LoginResponseData] = deriveDecoder
   implicit val loginResponseDataRequestEncoder: Encoder[LoginResponseData] = deriveEncoder
 
