@@ -54,10 +54,14 @@ class BudgetAssignService(
       .execute(userRepository.find(UserFilters(email = Some(request.email))))
       .valueOr(BudgetAssignResult.UserNotFound)
     
-  private def checkBudgetUserExists(budgetId: BudgetId, userId: UserId): StepIO[BudgetUser] =
+  private def checkBudgetUserExists(budgetId: BudgetId, userId: UserId): StepIO[Unit] =
     transactor
       .execute(budgetUserRepository.find(BudgetUserFilters(budgetId = Some(budgetId), userId = Some(userId))))
-      .valueOr(BudgetAssignResult.UserAlreadyAssigned)
+      .ensureF(
+        _.isEmpty,
+        Logger[IO].error(s"BudgetAssignService: user $userId is already assigned to budget $budgetId").as(BudgetAssignResult.UserAlreadyAssigned)
+      )
+      .map(_ => ())
     
   private def assignUser(budgetId: BudgetId, userId: UserId): StepIO[Unit] =
     transactor

@@ -36,6 +36,6 @@ trait AuthModule extends AuthRouteProvider with RouteProvider {
   lazy val authRouter: AuthRouter = wire[AuthRouter]
 
   abstract override def route: Route = super.route ~ authRouter.routes
-  abstract override def route(authContext: AuthContext): Route = super.route ~ authRouter.routes(authContext: AuthContext)
+  abstract override def route(authContext: AuthContext): Route = super.route(authContext) ~ authRouter.routes(authContext: AuthContext)
 
 }
