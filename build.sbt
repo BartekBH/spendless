@@ -24,9 +24,10 @@ val Log4CatsVersion       = "2.7.0"
 val JbcryptVersion        = "0.4"
 val JwtCoreVersion        = "10.0.1"
 val JavaCompatVersion     = "1.0.2"
-val kebsVersion           = "2.0.0"
-val scalatestVersion      = "3.2.19"
-val scalamockVersion      = "6.0.0"
+val KebsVersion           = "2.0.0"
+val ScalaTestVersion      = "3.2.19"
+val ScalaMockVersion      = "6.0.0"
+val EasyMockVersion       = "3.2.19.0"
 
 libraryDependencies ++= Seq(
   "org.apache.pekko"              %% "pekko-actor-typed"          % PekkoVersion,
@@ -53,8 +54,9 @@ libraryDependencies ++= Seq(
   "com.github.jwt-scala"          %% "jwt-core"                   % JwtCoreVersion,
   "org.mindrot"                    % "jbcrypt"                    % JbcryptVersion,
   "org.scala-lang.modules"        %% "scala-java8-compat"         % JavaCompatVersion,
-  "pl.iterators"                  %% "kebs-opaque"                % kebsVersion,
-  "pl.iterators"                  %% "kebs-scalacheck"            % kebsVersion       % "test",
-  "org.scalatest"                 %% "scalatest"                  % scalatestVersion  % "test",
-  "org.scalamock"                 %% "scalamock"                  % scalamockVersion % "test"
+  "pl.iterators"                  %% "kebs-opaque"                % KebsVersion,
+  "pl.iterators"                  %% "kebs-scalacheck"            % KebsVersion       % "test",
+  "org.scalatest"                 %% "scalatest"                  % ScalaTestVersion  % "test",
+  "org.scalamock"                 %% "scalamock"                  % ScalaMockVersion  % "test",
+  "org.scalatestplus"             %% "easymock-5-3"               % EasyMockVersion   % "test"
 )
