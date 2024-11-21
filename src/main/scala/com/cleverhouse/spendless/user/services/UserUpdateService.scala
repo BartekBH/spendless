@@ -25,10 +25,11 @@ class UserUpdateService(
 
   def update(authContext: AuthContext, userId: UserId, request: UserUpdateRequest): IO[UserUpdateResult] =
     (for {
-      user              <- findUser(userId)
-      updatedUser       <- updatedUser(user, request)
-      result            <- updateUser(updatedUser)
-      _                 <- Logger[IO].info(s"Updating user $userId").seal
+      _           <- checkIfSelf(authContext, userId)
+      user        <- findUser(userId)
+      updatedUser <- updatedUser(user, request)
+      result      <- updateUser(updatedUser)
+      _           <- Logger[IO].info(s"Updating user $userId").seal
     } yield UserUpdateResult.Ok(result)).run
     
   private def checkIfSelf(authContext: AuthContext, userId: UserId): StepIO[Boolean] =
