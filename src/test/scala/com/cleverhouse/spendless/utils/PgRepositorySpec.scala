@@ -19,6 +19,14 @@ trait PgRepositorySpec extends AnyWordSpec with KebsScalacheckGenerators with Ma
       db.run {
         a.map[T](r => throw AbortTx(r)).transactionally.asTry.map[T] {
           case Failure(AbortTx(value)) => value.asInstanceOf[T]
+          case Failure(t)              => throw t
+          case Success(_)              => sys.error("This should never happen")
+        }
+      },
+      Duration.Inf
+    )
+
+  private case class AbortTx[T](value: T) extends Exception
 
   private val url      = sys.env.getOrElse("TEST_DB_URL", "jdbc:postgresql://localhost:5432/spendless-test")
   private val user     = sys.env.getOrElse("TEST_DB_USER", "postgres-test")
@@ -34,3 +42,4 @@ trait PgRepositorySpec extends AnyWordSpec with KebsScalacheckGenerators with Ma
   )
 
 }
+
