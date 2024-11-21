@@ -4,14 +4,14 @@ services:
     image: postgres:14.1-alpine
     restart: always
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=spendless
+      - POSTGRES_USER=postgres-test
+      - POSTGRES_PASSWORD=postgres-test
+      - POSTGRES_DB=spendless-test
     ports:
       - '5432:5432'
     volumes:
       - db:/var/lib/postgresql11/data
-      - ./src/main/resources/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   db:
