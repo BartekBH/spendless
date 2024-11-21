@@ -1,16 +1,18 @@
 package com.cleverhouse.spendless.utils
 
+import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import pl.iterators.kebs.scalacheck.KebsScalacheckGenerators
 import slick.jdbc.PostgresProfile.api.*
 
+import java.time.Instant
 import java.util.Properties
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContext}
 import scala.util.{Failure, Success}
 
-trait PgRepositorySpec extends AnyWordSpec with KebsScalacheckGenerators with Matchers {
+trait PgRepositorySpec extends AnyWordSpec with Generators with Matchers {
 
   implicit val ec: ExecutionContext = scala.concurrent.ExecutionContext.Implicits.global
 

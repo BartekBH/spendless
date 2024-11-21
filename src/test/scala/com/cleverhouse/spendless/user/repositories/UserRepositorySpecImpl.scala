@@ -11,13 +11,6 @@ import java.time.Instant
 
 class UserRepositorySpecImpl extends PgRepositorySpec {
 
-  implicit val arbInstant: Arbitrary[Instant] =
-    Arbitrary {
-      Gen.chooseNum(Int.MinValue, Int.MaxValue).map { value =>
-        Instant.ofEpochMilli(System.currentTimeMillis()).plusMillis(value.toLong)
-      }
-    }
-
   private val sut: UserRepository = new UserRepositoryImpl()
 
   val userGenerator: Generator[User] = allGenerators[User].maximal
