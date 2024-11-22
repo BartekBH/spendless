@@ -66,7 +66,7 @@ class UserRouter(
     (post & entity(as[UserCreateRequest]) & pathEndOrSingleSlash) { request =>
       complete(userCreateService.create(request)) {
         case UserCreateResult.Ok(user) => StatusCodes.OK -> user
-        case UserCreateResult.EmailAlreadyExist => StatusCodes.Forbidden
+        case UserCreateResult.EmailAlreadyExist => StatusCodes.Conflict
         case UserCreateResult.InvalidPassword => StatusCodes.BadRequest
       }
     }
