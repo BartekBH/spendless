@@ -9,7 +9,6 @@ import com.cleverhouse.spendless.budget.repositories.{BudgetRepository, BudgetUs
 import com.cleverhouse.spendless.budget.repositories.BudgetRepository.BudgetFilters
 import com.cleverhouse.spendless.budget.repositories.BudgetUserRepository.BudgetUserFilters
 import com.cleverhouse.spendless.budget.services.BudgetAssignService.{BudgetAssignRequest, BudgetAssignResult}
-import com.cleverhouse.spendless.budget.services.BudgetFindService.BudgetFindResult
 import com.cleverhouse.spendless.user.domain.User
 import com.cleverhouse.spendless.user.domain.UserDomain.{UserEmail, UserId}
 import com.cleverhouse.spendless.user.repositories.UserRepository
@@ -18,7 +17,6 @@ import com.cleverhouse.spendless.utils.db.PostgresIOTransactor
 import com.cleverhouse.spendless.utils.log.Logging
 import com.cleverhouse.spendless.utils.service.SealedMonadServiceIODBIO
 import org.typelevel.log4cats.Logger
-import pl.iterators.sealedmonad.Sealed
 import pl.iterators.sealedmonad.syntax.*
 
 class BudgetAssignService(
